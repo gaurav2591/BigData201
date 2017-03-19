@@ -1,0 +1,11 @@
+Assignment5_1
+---------------
+hadoop fs -mkdir /inputs/mr_inputs/assignment5
+
+hadoop fs -put /home/gaurav/Desktop/Module_5_Dataset/module5_ex1_f1 /inputs/mr_inputs/
+
+hadoop fs -put /home/gaurav/Desktop/Module_5_Dataset/module5_ex1_f2 /inputs/mr_inputs/
+
+hadoop jar /home/gaurav/hadoopWorkspace/assignment5_1.jar com.join.JoinMain /inputs/mr_inputs/assignment5/module5_ex1_f2  /outputs/mr_outputs/assignment5_1
+
+

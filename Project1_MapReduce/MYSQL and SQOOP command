@@ -1,0 +1,30 @@
+MYSQL
+--------
+
+create database books_db;
+
+use books_db;
+
+create table books(isbn varchar(20),book_title varchar(255), book_author varchar(255), year_of_pub varchar(10), publisher varchar(255), image_url_s varchar(255), image_url_m varchar(255), image_url_l varchar(255));
+
+
+create table books_ranking(user_id varchar(255), isbn varchar(255), ranking varchar(10));
+
+sudo cp /home/gaurav/Desktop/projects/BX-CSV-Dump/BX-Books.csv /var/lib/mysql-files/
+
+sudo cp /home/gaurav/Desktop/projects/BX-CSV-Dump/BX-Book-Ratings.csv /var/lib/mysql-files/
+
+
+LOAD DATA INFILE '/var/lib/mysql-files/BX-Books.csv' INTO TABLE books_db.books FIELDS TERMINATED BY ';' ENCLOSED BY '"' LINES TERMINATED BY '\r\n' IGNORE 1 ROWS;
+
+ LOAD DATA INFILE '/var/lib/mysql-files/BX-Book-Ratings.csv' INTO TABLE books_db.books_ranking FIELDS TERMINATED BY ';' ENCLOSED BY '"' LINES TERMINATED BY '\r\n' IGNORE 1 ROWS;
+
+SQOOP
+--------
+
+sqoop import --connect jdbc:mysql://localhost/books_db --username root -P --table books -m 1 --fields-terminated-by ^ --target-dir /inputs/mr_inputs/project1_dataset/
+
+sqoop import --connect jdbc:mysql://localhost/books_db --username root -P --table books_ranking -m 1 --fields-terminated-by ^ --target-dir /inputs/mr_inputs/project1_dataset2/
+
+
+

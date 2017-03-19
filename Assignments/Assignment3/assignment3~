@@ -1,0 +1,25 @@
+Assignment3_1
+---------------
+hadoop fs -put /home/gaurav/Desktop/Module_3_Ex1.txt /inputs/mr_inputs/
+
+hadoop jar /home/gaurav/hadoopWorkspace/filterRecIfGreaterTwenty.jar com.filter.FilterMain /inputs/mr_inputs/Module_3_Ex1.txt /outputs/mr_outputs/assignment3_1_output
+
+hadoop fs -cat /outputs/mr_outputs/assignment3_1_output/part*
+
+Assignment3_3
+--------------
+hadoop jar /home/gaurav/hadoopWorkspace/calculateWithoutCom.jar com.calculate.CalculateMain /inputs/mr_inputs/Module_3_Ex1.txt /outputs/mr_outputs/assignment3_2_output
+
+hadoop fs -cat /outputs/mr_outputs/assignment3_2_output/part*
+
+
+
+Assignment3_3
+--------------
+hadoop jar /home/gaurav/hadoopWorkspace/calculate.jar com.calculate.CalculateMain /inputs/mr_inputs/Module_3_Ex1.txt /outputs/mr_outputs/assignment3_3_output
+
+hadoop fs -cat /outputs/mr_outputs/assignment3_3_output/part*
+
+
+
+

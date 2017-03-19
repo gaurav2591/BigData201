@@ -1,0 +1,1 @@
+hadoop jar /home/gaurav/Desktop/projects/booksMax.jar com.books.BooksMain /inputs/mr_inputs/project1_dataset/  /outputs/mr_outputs/pr78

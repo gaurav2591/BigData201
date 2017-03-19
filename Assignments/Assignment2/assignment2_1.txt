@@ -1,0 +1,16 @@
+Assignment2_1_1
+-----------------
+
+hadoop fs -mkdir /inputs
+
+hadoop fs -mkdir /inputs/mr_inputs/
+
+hadoop fs -mkdir /inputs/pig_inputs/
+
+hadoop fs -mkdir /inputs/project_inputs/
+
+
+Assignment2_1_2
+-----------------
+
+hadoop fs -put /home/gaurav/Desktop/mytextFile /inputs/mr_inputs/

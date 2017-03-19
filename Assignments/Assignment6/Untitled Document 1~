@@ -1,0 +1,53 @@
+Assignment6_1_2
+---------------
+
+A = LOAD '/inputs/mr_inputs/assignment_6' USING PigStorage(',') AS (firstName:chararray,lastName:chararray,company:chararray,tech:chararray,age:int);
+
+res = FOREACH A GENERATE firstName,tech; 
+DUMP res;
+
+
+
+Assignment6_1_3
+----------------
+A = LOAD '/inputs/mr_inputs/assignment_6' USING PigStorage(',') AS (firstName:chararray,lastName:chararray,company:chararray
+>> ,tech:chararray,age:int);
+
+B = GROUP A ALL;
+grunt> describe B;
+B: {group: chararray,A: {(firstName: chararray,lastName: chararray,company: chararray,tech: chararray,age: int)}}
+grunt> result = FOREACH B GENERATE COUNT_STAR(A);
+grunt> DUMP result;
+
+Assignment6_2
+------------------
+
+REGISTER /home/gaurav/hadoopWorkspace/concatenate.jar;
+
+A = LOAD '/inputs/mr_inputs/assignment_6' USING PigStorage(',') AS (firstName:chararray,lastName:chararray,company:chararray,tech:chararray,age:int);
+
+B = GROUP A ALL;
+describe B;
+
+C = FOREACH B GENERATE FLATTEN(udf.Concatenate(A));
+DUMP C;
+
+Assignment6_3
+---------------
+
+grunt> REGISTER /home/gaurav/hadoopWorkspace/filt.jar;
+grunt> A = LOAD '/inputs/mr_inputs/asgnmnt6_2' USING PigStorage(',') AS (firstName:chararray,lastName:chararray,company:chararray,tech:chararray);
+grunt> describe A;
+grunt>  B = FILTER A BY udf.Filt(lastName) AND udf.Filt(company);
+
+
+Assignment6_4
+-------------------------
+grunt> REGISTER /home/gaurav/hadoopWorkspace/filt.jar;
+grunt> A = LOAD '/inputs/mr_inputs/excercise_4_data.txt' USING PigStorage(',') AS (name:chararray,age:chararray,gender:chararray);
+grunt> B = FILTER A BY udf.Filt(age)==false; 
+grunt> C = FILTER A BY udf.Filt(age)==true AND (INT)age%2==0; 
+grunt> D = FILTER A BY udf.Filt(age)==true AND (INT)age%2!=0; 
+
+
+

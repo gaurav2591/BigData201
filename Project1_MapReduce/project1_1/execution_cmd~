@@ -1,0 +1,1 @@
+hadoop jar /home/gaurav/Desktop/projects/jars/booksFreq.jar com.books.BooksMain /inputs/mr_inputs/project1_dataset2/part-m-00000  /outputs/mr_outputs/pr74

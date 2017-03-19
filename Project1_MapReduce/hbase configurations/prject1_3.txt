@@ -1,0 +1,7 @@
+create 'project1_3','output'
+
+
+exit hase shell
+
+hbase org.apache.hadoop.hbase.mapreduce.ImportTsv -Dimporttsv.separator=\t
+  -Dimporttsv.columns="HBASE_ROW_KEY,ranking,output:freq" project1_3 hdfs://localhost:9000/inputs/mr_inputs/project1_3_output

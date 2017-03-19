@@ -1,0 +1,39 @@
+hadoop fs -put '/home/gaurav/Desktop/store_Details' /inputs/mr_inputs
+
+create database assignment7;
+
+use assignment7;
+
+create table store_details (store_location INT, store_description STRING, store_type STRING)
+    row format delimited 
+    fields terminated by ','
+    stored as textfile;
+
+
+
+LOAD DATA INPATH '/inputs/mr_inputs/store_Details' OVERWRITE INTO TABLE store_details;
+
+create table store_sales (store_location INT, operation_date STRING, tot_sales DOUBLE)
+     row format delimited 
+     fields terminated by ','
+     stored as textfile;
+
+LOAD DATA INPATH '/inputs/mr_inputs/store_Sales' OVERWRITE INTO TABLE store_sales;
+
+select * from store_sales;
+
+
+select sd.store_location,sd.store_description,sd.store_type,ss.operation_date,ss.tot_sales from store_details sd, store_sales ss where sd.store_location = ss.store_location;
+
+
+ create external table stores_report (store_location INT,store_description STRING,store_type STRING, operation_date STRING, tot_sales DOUBLE)
+    > row format delimited 
+    > fields terminated by ','
+    > stored as textfile;
+
+INSERT INTO TABLE stores_report select sd.store_location,sd.store_description,sd.store_type,ss.operation_date,ss.tot_sales from store_details sd, store_sales ss where sd.store_location = ss.store_location;
+
+
+
+
+

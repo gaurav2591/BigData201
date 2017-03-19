@@ -1,0 +1,17 @@
+Assignment2_1
+------------------
+hadoop fs -put /home/gaurav/Desktop/assignmentDataset2_2_1 /inputs/mr_inputs/
+
+Assignment2_2
+-----------------
+hadoop fs -mkdir /outputs
+
+hadoop fs -mkdir /outputs/mr_outputs/
+
+hadoop jar /home/gaurav/hadoopWorkspace/linesCount.jar com.lineCount.LineCountMain /inputs/mr_inputs/assignmentDataset2_2_1 /outputs/mr_outputs/assignment2_2_2_output
+
+
+Assignment2_3
+----------------
+hadoop jar /home/gaurav/hadoopWorkspace/filterRecords.jar com.filterRecords.FilterRecordsMain /inputs/mr_inputs/assignmentDataset2_2_1 /outputs/mr_outputs/assignment2_2_3_output
+

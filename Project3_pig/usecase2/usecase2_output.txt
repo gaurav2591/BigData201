@@ -1,0 +1,3 @@
+US,20
+Japan,4
+Europe,6

@@ -1,0 +1,40 @@
+Assignment4_1
+----------------------
+hadoop fs -put /home/gaurav/Desktop/Module_4_Ex1.txt /inputs/mr_inputs/
+
+hadoop jar /home/gaurav/hadoopWorkspace/assignment4_1.jar com.partitioner.PartitionerMain /inputs/mr_inputs/Module_4_Ex1.txt  /outputs/mr_outputs/assignment4_1
+
+
+
+
+Assignment4_2
+------------------
+ hadoop fs -put /home/gaurav/Desktop/Module_4_Ex2.txt /inputs/mr_inputs/
+
+hadoop jar /home/gaurav/hadoopWorkspace/assignment4_2.jar com.FilterCounter.FilterCounter /inputs/mr_inputs/Module_4_Ex2.txt  /outputs/mr_outputs/assignment4_2
+
+
+Assignment4_4
+-----------------
+ hadoop jar /home/gaurav/hadoopWorkspace/assignment4Reduce.jar com.reduceSideJoin.ReduceSideJoin /inputs/mr_inputs/assignment4Data/store_locations.txt /inputs/mr_inputs/assignment4Data/store_sales.txt  /outputs/mr_outputs/assignment4ReduceSideJoin
+
+
+hadoop fs -cat /outputs/mr_outputs/assignment4ReduceSideJoin/part*
+
+17/03/13 20:05:39 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+BTM	Levis,1300000.0
+Bellandur	Levis,700000.0
+HSR Layout	Mufti,1000000.0
+JP Nagar	Mufti,330000.0
+Jayanagar	Mufti,270000.0
+KR Puram	Pepe Jeans,650000.0
+Marathahalli	Lee,550000.0
+
+
+Assignment4_3
+------------------
+hadoop fs -mkdir /inputs/mr_inputs/assignment4Data
+hadoop fs -put /home/gaurav/Desktop/As4Data/store_locations.txt /inputs/mr_inputs/assignment4Data
+hadoop fs -put /home/gaurav/Desktop/As4Data/store_sales.txt /inputs/mr_inputs/assignment4Data
+hadoop jar /home/gaurav/hadoopWorkspace/assignment4_3.final.jar com.join.JoinMain /inputs/mr_inputs/assignment4Data/store_locations.txt  /outputs/mr_outputs/assignment4_3
+

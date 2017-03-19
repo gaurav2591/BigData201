@@ -1,0 +1,103 @@
+create 'employee','official','personal'
+
+
+describe 'employee'
+
+Table employee is ENABLED                                                                                                             
+COLUMN FAMILIES DESCRIPTION                                                                                                           
+{NAME => 'official', BLOOMFILTER => 'ROW', VERSIONS => '1', IN_MEMORY => 'false', KEEP_DELETED_CELLS => 'FALSE', DATA_BLOCK_ENCODING =
+> 'NONE', TTL => 'FOREVER', COMPRESSION => 'NONE', MIN_VERSIONS => '0', BLOCKCACHE => 'true', BLOCKSIZE => '65536', REPLICATION_SCOPE 
+=> '0'}                                                                                                                               
+{NAME => 'personal', BLOOMFILTER => 'ROW', VERSIONS => '1', IN_MEMORY => 'false', KEEP_DELETED_CELLS => 'FALSE', DATA_BLOCK_ENCODING =
+> 'NONE', TTL => 'FOREVER', COMPRESSION => 'NONE', MIN_VERSIONS => '0', BLOCKCACHE => 'true', BLOCKSIZE => '65536', REPLICATION_SCOPE 
+=> '0'}                                                                                                                               
+2 row(s) in 0.1670 seconds
+
+
+put 'employee', '1', 'official:mid','1001'
+
+
+scan 'employee'
+ROW                                COLUMN+CELL                                                                                        
+ 1                                 column=official:mid, timestamp=1489241787825, value=1001                                           
+1 row(s) in 0.1010 seconds
+
+put 'employee', '1', 'official:competency','C1'
+
+
+put 'employee', '1', 'personal:name','Ajay'
+
+
+put 'employee', '1', 'personal:city','Bangalore'
+
+
+scan 'employee'
+ROW                                COLUMN+CELL                                                                                        
+ 1                                 column=official:competency, timestamp=1489241818416, value=C1                                      
+ 1                                 column=official:mid, timestamp=1489241787825, value=1001                                           
+ 1                                 column=personal:city, timestamp=1489241862304, value=Bangalore                                     
+ 1                                 column=personal:name, timestamp=1489241852059, value=Ajay                                          
+1 row(s) in 0.0510 seconds
+
+
+put 'employee', '2', 'official:mid','1002'
+
+
+put 'employee', '2', 'official:competency','C2'
+
+
+put 'employee', '2', 'personal:name','Rahul'
+
+
+put 'employee', '2', 'personal:city','Mumbai'
+
+
+put 'employee', '2', 'personal:disable','Yes'
+
+
+scan 'employee'
+ROW                                COLUMN+CELL                                                                                        
+ 1                                 column=official:competency, timestamp=1489241818416, value=C1                                      
+ 1                                 column=official:mid, timestamp=1489241787825, value=1001                                           
+ 1                                 column=personal:city, timestamp=1489241862304, value=Bangalore                                     
+ 1                                 column=personal:name, timestamp=1489241852059, value=Ajay                                          
+ 2                                 column=official:competency, timestamp=1489241937733, value=C2                                      
+ 2                                 column=official:mid, timestamp=1489241923340, value=1002                                           
+ 2                                 column=personal:city, timestamp=1489241974954, value=Mumbai                                        
+ 2                                 column=personal:disable, timestamp=1489241987390, value=Yes                                        
+ 2                                 column=personal:name, timestamp=1489241955760, value=Rahul                                         
+2 row(s) in 0.0900 seconds
+
+
+put 'employee', '1', 'personal:city','Delhi'
+
+
+put 'employee', '2', 'personal:name','RahulG'
+
+
+scan 'employee'
+ROW                                COLUMN+CELL                                                                                        
+ 1                                 column=official:competency, timestamp=1489241818416, value=C1                                      
+ 1                                 column=official:mid, timestamp=1489241787825, value=1001                                           
+ 1                                 column=personal:city, timestamp=1489242221935, value=Delhi                                         
+ 1                                 column=personal:name, timestamp=1489241852059, value=Ajay                                          
+ 2                                 column=official:competency, timestamp=1489241937733, value=C2                                      
+ 2                                 column=official:mid, timestamp=1489241923340, value=1002                                           
+ 2                                 column=personal:city, timestamp=1489241974954, value=Mumbai                                        
+ 2                                 column=personal:disable, timestamp=1489241987390, value=Yes                                        
+ 2                                 column=personal:name, timestamp=1489242250929, value=RahulG                                        
+2 row(s) in 0.1060 seconds
+
+
+deleteall 'employee','2'
+0 row(s) in 0.0940 seconds
+
+scan 'employee'
+ROW                                COLUMN+CELL                                                                                        
+ 1                                 column=official:competency, timestamp=1489241818416, value=C1                                      
+ 1                                 column=official:mid, timestamp=1489241787825, value=1001                                           
+ 1                                 column=personal:city, timestamp=1489242221935, value=Delhi                                         
+ 1                                 column=personal:name, timestamp=1489241852059, value=Ajay                                          
+1 row(s) in 0.0480 seconds
+
+

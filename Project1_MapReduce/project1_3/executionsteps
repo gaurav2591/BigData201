@@ -1,0 +1,2 @@
+hadoop jar /home/gaurav/Desktop/projects/booksByRanking.jar com.books.BooksBasedOnRanking /inputs/mr_inputs/project1_dataset/part-m-00000 /inputs/mr_inputs/project1_dataset2/part-m-00000 /outputs/mr_outputs/pr79
+

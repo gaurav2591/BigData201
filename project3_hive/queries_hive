@@ -1,0 +1,42 @@
+MYSQL Db setup;
+-----------------
+create database cars_db;
+
+use cars_db;
+
+create table cars(car varchar(255), mpg double, cylinders int, displacement double, horsePower double, weight double, acceleration double, model int, origin varchar(255));
+
+LOAD DATA INFILE '/var/lib/mysql-files/cars.csv' INTO TABLE cars_db.cars FIELDS TERMINATED BY ';' LINES TERMINATED BY '\r\n' IGNORE 2 ROWS;
+
+
+Hive DB setup
+--------------
+1. sqoop import --connect jdbc:mysql://localhost/cars_db --username root -P --table cars --hive-import --hive-table cars_hive_db.cars_hive -m 1
+
+2. sqoop create-hive-table --connect jdbc:mysql://localhost/cars_db --username root -P --table cars --hive-table cars_hive;
+
+3. load data inpath '/user/hduser/cars/part-m-00000' into table cars_hive;
+
+
+Project 3 (Using Hive)
+--------------------------
+
+Use-Case 1
+----------
+INSERT OVERWRITE DIRECTORY '/user/hduser/usecase1_output' select count(*) from cars_hive where horsepower > 200;
+
+
+
+Use-Case 2
+----------
+INSERT OVERWRITE DIRECTORY '/user/hduser/usecase2_1_output' select origin,count(*) from cars_hive where (model=75) and ((origin=='US') or (origin == 'Europe') or (origin == 'Japan')) group by origin;
+
+INSERT OVERWRITE DIRECTORY '/user/hduser/usecase2_2_output' select max(f.cnt) as cntmax from (select b.origin as org, count(*) as cnt from cars_hive b where (b.model=75) and ((b.origin=='US') or (b.origin == 'Europe') or (b.origin == 'Japan')) group by b.origin) f;
+
+
+Use-Case 3
+----------
+INSERT OVERWRITE DIRECTORY '/user/hduser/usecase3_output' select origin,count(*) from cars_hive where (weight < 2500) and ((cylinders == 6) or (cylinders == 4) or (cylinders == 2)) group by origin;
+
+
+

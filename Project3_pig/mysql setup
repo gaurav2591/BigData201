@@ -1,0 +1,16 @@
+MYSQL Setup
+------------
+
+create database cars_db;
+
+use cars_db;
+
+create table cars(car varchar(255), mpg double, cylinders int, displacement double, horsePower double, weight double, acceleration double, model int, origin varchar(255));
+
+LOAD DATA INFILE '/var/lib/mysql-files/cars.csv' INTO TABLE cars_db.cars FIELDS TERMINATED BY ';' LINES TERMINATED BY '\r\n' IGNORE 2 ROWS;
+
+
+
+SQOOP Import to HDFS
+---------------------
+sqoop import --connect jdbc:mysql://localhost/cars_db --username root -P --table cars  -m 1

@@ -1,0 +1,4 @@
+hadoop jar /home/gaurav/Desktop/projects/booksByRanking.jar com.books.BooksBasedOnRanking /inputs/mr_inputs/sqoopProject_1/part-m-00000 /inputs/mr_inputs/sqoopProjectBooksRanking/part-m-00000 /outputs/mr_outputs/pr7
+
+
+hadoop jar /home/gaurav/Desktop/projects/booksFreq.jar com.books.BooksMain /inputs/mr_inputs/project1_dataset/  /outputs/mr_outputs/pr77

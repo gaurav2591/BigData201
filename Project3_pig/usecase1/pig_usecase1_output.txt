@@ -1,0 +1,10 @@
+Chevrolet Impala,14.0,8,454.0,220.0,4354.0,9.0,70,US
+Plymouth Fury iii,14.0,8,440.0,215.0,4312.0,8.5,70,US
+Pontiac Catalina,14.0,8,455.0,225.0,4425.0,10.0,70,US
+Buick Estate Wagon (sw),14.0,8,455.0,225.0,3086.0,10.0,70,US
+Ford F250,10.0,8,360.0,215.0,4615.0,14.0,70,US
+Dodge D200,11.0,8,318.0,210.0,4382.0,13.5,70,US
+Mercury Marquis,11.0,8,429.0,208.0,4633.0,11.0,72,US
+Chrysler New Yorker Brougham,13.0,8,440.0,215.0,4735.0,11.0,73,US
+Buick Electra 225 Custom,12.0,8,455.0,225.0,4951.0,11.0,73,US
+Pontiac Grand Prix,16.0,8,400.0,230.0,4278.0,9.5,73,US

@@ -1,0 +1,48 @@
+create database assignment8;
+
+use assignment8;
+
+create table sales_info(store_id INT,txn_dt STRING,txn_amt DOUBLE)
+     row format delimited 
+     fields terminated by ','
+     stored as textfile;
+
+
+create external table sales_master(store_id INT,store_name STRING)
+     row format delimited 
+     fields terminated by ','
+     stored as textfile;
+
+
+LOAD DATA INPATH '/inputs/mr_inputs/assignment8dataset1' OVERWRITE INTO TABLE sales_info;
+
+select * from sales_info;
+OK
+100	2015-01-01	12649.98
+100	2015-01-01	2345.85
+100	2015-01-01	3563.65
+101	2015-01-01	6382.76
+101	2015-01-01	35729.09
+101	2015-01-02	23479.65
+101	2015-01-02	45627.87
+102	2015-01-01	62845.62
+102	2015-01-01	62978.27
+103	2015-01-02	45678.92
+103	2015-01-03	56782.71
+103	2015-0104	263822.96
+
+LOAD DATA INPATH '/inputs/mr_inputs/assignment8dataset2' OVERWRITE INTO TABLE sales_master;
+
+select * from sales_master;
+OK
+100	Mumbai-Powai
+101	Mumbai-Goregaon
+102	Mumbai-Dadar
+103	Mumbai-Thane
+104	Pune-Aundh
+105	Pune-Magarpatta
+106	Pune-Kharadi
+Time taken: 0.686 seconds, Fetched: 7 row(s)
+
+
+INSERT INTO TABLE sales_report select si.store_id,sm.store_name,si.txn_amt from sales_info si join sales_master sm on (si.store_id = sm.store_id);
